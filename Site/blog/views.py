@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_list_or_404, redirect
 from .models import Post, Comment
 from datetime import datetime
-#from .forms import CommentForm
+# from .forms import CommentForm
 from django.http import HttpResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django import template
 
 
 # Create your views here.
@@ -23,7 +24,7 @@ def index(request):
     except ObjectDoesNotExist:
         raise Http404("Post does not exit!")
 
-    return HttpResponse("Work")
+    return render(request, 'blog/post_list.html', {'posts': posts})
 
 
 def post_list():
